@@ -13,7 +13,6 @@ C:\Users\Sanjivani\Desktop\Farm Website\farma-API\bin\Debug\net10.0\FarmaApi.sta
 C:\Users\Sanjivani\Desktop\Farm Website\farma-API\bin\Debug\net10.0\FarmaApi.exe
 C:\Users\Sanjivani\Desktop\Farm Website\farma-API\bin\Debug\net10.0\FarmaApi.deps.json
 C:\Users\Sanjivani\Desktop\Farm Website\farma-API\bin\Debug\net10.0\FarmaApi.runtimeconfig.json
-C:\Users\Sanjivani\Desktop\Farm Website\farma-API\bin\Debug\net10.0\FarmaApi.runtimeconfig.dev.json
 C:\Users\Sanjivani\Desktop\Farm Website\farma-API\bin\Debug\net10.0\FarmaApi.dll
 C:\Users\Sanjivani\Desktop\Farm Website\farma-API\bin\Debug\net10.0\FarmaApi.pdb
 C:\Users\Sanjivani\Desktop\Farm Website\farma-API\bin\Debug\net10.0\BCrypt-Net-Next.dll
@@ -123,7 +122,6 @@ C:\Users\Sanjivani\Desktop\Farm Website\farma-API\bin\Debug\net10.0\zh-Hant\Micr
 C:\Users\Sanjivani\Desktop\Farm Website\farma-API\obj\Debug\net10.0\rjimswa.dswa.cache.json
 C:\Users\Sanjivani\Desktop\Farm Website\farma-API\obj\Debug\net10.0\rjsmrazor.dswa.cache.json
 C:\Users\Sanjivani\Desktop\Farm Website\farma-API\obj\Debug\net10.0\rjsmcshtml.dswa.cache.json
-C:\Users\Sanjivani\Desktop\Farm Website\farma-API\obj\Debug\net10.0\scopedcss\scopedcss.cache
 C:\Users\Sanjivani\Desktop\Farm Website\farma-API\obj\Debug\net10.0\scopedcss\bundle\FarmaApi.styles.css
 C:\Users\Sanjivani\Desktop\Farm Website\farma-API\obj\Debug\net10.0\staticwebassets.build.json
 C:\Users\Sanjivani\Desktop\Farm Website\farma-API\obj\Debug\net10.0\staticwebassets.build.json.cache
