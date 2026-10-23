@@ -1,6 +1,97 @@
 @FarmaApi_HostAddress = http://localhost:5275
 
-GET {{FarmaApi_HostAddress}}/weatherforecast/
+### 1. Root / Health Check
+GET {{FarmaApi_HostAddress}}/
 Accept: application/json
 
-###
+### 2. Register New Farmer
+# @name registerFarmer
+POST {{FarmaApi_HostAddress}}/api/auth/signup
+Content-Type: application/json
+
+{
+  "name": "Ramesh Patil",
+  "email": "ramesh.farmer@example.com",
+  "password": "Password123!",
+  "mobileNumber": "9876543210",
+  "age": 35,
+  "role": "farmer",
+  "city": "Pune",
+  "state": "Maharashtra"
+}
+
+### 3. Register New Customer
+# @name registerCustomer
+POST {{FarmaApi_HostAddress}}/api/auth/signup
+Content-Type: application/json
+
+{
+  "name": "Ananya Sharma",
+  "email": "ananya.customer@example.com",
+  "password": "Password123!",
+  "mobileNumber": "9123456780",
+  "age": 28,
+  "role": "customer",
+  "city": "Mumbai",
+  "state": "Maharashtra"
+}
+
+### 4. User Login
+# @name login
+POST {{FarmaApi_HostAddress}}/api/auth/login
+Content-Type: application/json
+
+{
+  "email": "ramesh.farmer@example.com",
+  "password": "Password123!",
+  "rememberMe": true
+}
+
+### Store token from login response
+@authToken = {{login.response.body.token}}
+
+### 5. Get Authenticated User Profile
+GET {{FarmaApi_HostAddress}}/api/auth/me
+Authorization: Bearer {{authToken}}
+Accept: application/json
+
+### 6. Get All Farm Products
+GET {{FarmaApi_HostAddress}}/api/products
+Accept: application/json
+
+### 7. Filter Products by Category
+GET {{FarmaApi_HostAddress}}/api/products?category=Vegetables&isOrganic=true
+Accept: application/json
+
+### 8. Create Product (Farmer only)
+POST {{FarmaApi_HostAddress}}/api/products
+Authorization: Bearer {{authToken}}
+Content-Type: application/json
+
+{
+  "name": "Organic Alphonso Mangoes",
+  "description": "Naturally ripened, chemical-free organic Alphonso mangoes from Ratnagiri orchard.",
+  "category": "Fruits",
+  "pricePerUnit": 450.00,
+  "unit": "kg",
+  "quantityAvailable": 100,
+  "imageUrl": "/images/mangoes.jpg",
+  "isOrganic": true
+}
+
+### 9. Create Farm Details (Farmer only)
+POST {{FarmaApi_HostAddress}}/api/farms
+Authorization: Bearer {{authToken}}
+Content-Type: application/json
+
+{
+  "farmName": "Green Valley Organic Agro",
+  "location": "Ratnagiri, Maharashtra",
+  "totalAcres": 12.5,
+  "soilType": "Red Laterite",
+  "organicCertificationNo": "NPOP/NAB/0019/2024"
+}
+
+### 10. List Farms
+GET {{FarmaApi_HostAddress}}/api/farms
+Accept: application/json
