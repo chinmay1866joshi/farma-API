@@ -14,6 +14,7 @@ public class AppDbContext : DbContext
     public DbSet<Order> Orders => Set<Order>();
     public DbSet<OrderItem> OrderItems => Set<OrderItem>();
     public DbSet<Farm> Farms => Set<Farm>();
+    public DbSet<FarmDocument> FarmDocuments => Set<FarmDocument>();
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -57,6 +58,13 @@ public class AppDbContext : DbContext
             .HasOne(f => f.Farmer)
             .WithMany(u => u.Farms)
             .HasForeignKey(f => f.FarmerId)
+            .OnDelete(DeleteBehavior.Cascade);
+
+        // User to FarmDocuments relationship
+        modelBuilder.Entity<FarmDocument>()
+            .HasOne(d => d.Farmer)
+            .WithMany()
+            .HasForeignKey(d => d.FarmerId)
             .OnDelete(DeleteBehavior.Cascade);
     }
 }

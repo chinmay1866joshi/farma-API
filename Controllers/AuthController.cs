@@ -184,4 +184,50 @@ public class AuthController : ControllerBase
             CreatedAt = user.CreatedAt
         });
     }
+
+    /// <summary>
+    /// Update password after verifying the old password
+    /// </summary>
+    [HttpPost("change-password")]
+    [Authorize]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
+    public async Task<IActionResult> ChangePassword([FromBody] ChangePasswordRequestDto request)
+    {
+        if (!ModelState.IsValid)
+        {
+            return BadRequest(ModelState);
+        }
+
+        var userIdClaim = User.FindFirstValue(ClaimTypes.NameIdentifier);
+        if (string.IsNullOrEmpty(userIdClaim) || !Guid.TryParse(userIdClaim, out var userId))
+        {
+            return Unauthorized(new { message = "Invalid authentication claims." });
+        }
+
+        var user = await _context.Users.FindAsync(userId);
+        if (user == null)
+        {
+            return NotFound(new { message = "User not found." });
+        }
+
+        // Verify if old password is correct
+        if (!BCrypt.Net.BCrypt.Verify(request.OldPassword, user.PasswordHash))
+        {
+            return BadRequest(new { message = "Incorrect current password. Please enter your valid old password." });
+        }
+
+        if (request.OldPassword == request.NewPassword)
+        {
+            return BadRequest(new { message = "New password cannot be identical to your old password." });
+        }
+
+        user.PasswordHash = BCrypt.Net.BCrypt.HashPassword(request.NewPassword);
+        await _context.SaveChangesAsync();
+
+        _logger.LogInformation("Password changed successfully for user: {Email}", user.Email);
+        return Ok(new { message = "Password updated successfully." });
+    }
 }
